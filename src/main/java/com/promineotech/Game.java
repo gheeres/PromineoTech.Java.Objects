@@ -19,6 +19,8 @@ public class Game extends JPanel
   private static List<Sprite> sprites = new ArrayList<>();
   
   void start() {
+    // addSprite(new MoveableSprite("icons8-woman-farmer-96.png", 10, 10, 1, 33));
+    
     while(true) {
       try {
         for(Sprite sprite : getSprites()) {
