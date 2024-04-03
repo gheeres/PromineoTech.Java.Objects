@@ -1,10 +1,11 @@
 package com.promineotech;
 
 import java.util.List;
-import java.util.Random;
 
+/**
+ * Represents a sprite than can move or change position over time.
+ */
 public class MoveableSprite extends Sprite {
-  private static final Random random = new Random();
   private int modifierX = 1;
   private int modifierY = 1;
   
@@ -12,7 +13,7 @@ public class MoveableSprite extends Sprite {
   private int direction;
   
   public MoveableSprite(String iconName, int x, int y) {
-    this(iconName, x, y, random.nextInt(10), random.nextInt(360));
+    this(iconName, x, y, Math.max(1, Game.getRandomInt(10)), Math.max(1, Game.getRandomInt(360)));
   }
 
   public MoveableSprite(String iconName, int x, int y, int speed, int direction) {
@@ -40,11 +41,11 @@ public class MoveableSprite extends Sprite {
     x = (int) Math.round((this.speed * this.modifierX) * Math.cos(angle) + this.x);
     y = (int) Math.round((this.speed * this.modifierY) * Math.sin(angle) + this.y);
 
-      // At edge of screen? Bounce back...
-    if (((x - Game.defaultSpriteSize) <= 0) || ((x + Game.defaultSpriteSize) >= Game.width)) {
+    // At edge of screen? Bounce back...
+    if ((x <= 0) || ((x + Game.getDefaultSpriteSize()) >= Game.getDefaultCanvasWidth())) {
       this.modifierX *= -1;
     }
-    if (((y - Game.defaultSpriteSize) <= 0) || ((y + Game.defaultSpriteSize) >= Game.height)) {
+    if ((y <= 0) || ((y + Game.getDefaultSpriteSize()) >= Game.getDefaultCanvasHeight())) {
       this.modifierY *= -1;
     }
   }    

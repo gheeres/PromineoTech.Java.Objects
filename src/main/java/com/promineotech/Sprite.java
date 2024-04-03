@@ -93,6 +93,10 @@ public class Sprite {
     return String.format("%s; x: %d, y: %d", iconName, x, y);
   }
   
+  /**
+   * Draws or renders the sprite to the specified graphics instance.
+   * @param graphics The current graphics instance.
+   */
   public void render(Graphics graphics) {
     if (icon != null) {
       System.out.println(this.toString());
