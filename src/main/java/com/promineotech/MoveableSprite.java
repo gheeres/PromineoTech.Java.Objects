@@ -1,7 +1,5 @@
 package com.promineotech;
 
-import java.util.List;
-
 /**
  * Represents a sprite than can move or change position over time.
  */
@@ -22,11 +20,6 @@ public class MoveableSprite extends Sprite {
 
   public MoveableSprite(String iconName, int x, int y, int speed, int direction) {
     super(iconName, x, y);
-
-    // Prevent straight up/down & side/side
-    if ((direction == 0) || (direction % 90 == 0)) {
-      direction++;
-    }
 
     this.speed = speed;
     this.direction = direction;
@@ -98,11 +91,11 @@ public class MoveableSprite extends Sprite {
    * @param {Sprite} sprite The sprite that collided with another sprite.
    * @param {Array.Sprite} collided The collection of sprites collided with.
    */
-  public void handleCollision(Sprite sprite, List<Sprite> collided) {
-    if ((sprite != null) && (collided.size() > 0)) {
+  public void handleCollision(Iterable<Sprite> collided) {
+    if (collided != null) {
       for(Sprite other : collided) {
-        if (sprite.canInteractWith(other)) {
-          sprite.interactWith(other);
+        if (canInteractWith(other)) {
+          interactWith(other);
         }
       }
     }

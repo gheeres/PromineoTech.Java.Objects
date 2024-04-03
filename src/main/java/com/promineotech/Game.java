@@ -21,13 +21,14 @@ public class Game extends JPanel
   void start() {
     while(true) {
       try {
-        for(Sprite sprite : sprites) {
+        for(Sprite sprite : getSprites()) {
           if (sprite instanceof MoveableSprite) {
-            boolean isZombie = sprite instanceof Zombie;
-            boolean isPerson = (! isZombie) && (sprite instanceof Person);
+            // Move / Change Position
             ((MoveableSprite) sprite).move();
-            
+              
             // Collision detection
+            Iterable<Sprite> collided = sprite.getCollided(sprites);
+            ((MoveableSprite) sprite).handleCollision(collided);
           }
         }
         
@@ -71,7 +72,7 @@ public class Game extends JPanel
    * @return The collection of sprites.
    */
   public static Iterable<Sprite> getSprites() {
-    return sprites;
+    return new ArrayList<Sprite>(sprites);
   }
   
   /**
@@ -141,6 +142,9 @@ public class Game extends JPanel
    * @return the next pseudorandom, uniformly distributed int value between zero (inclusive) and bound (exclusive) from this random number generator's sequence
    */
   public static int getRandomInt(int bound) {
-    return random.nextInt(bound);
+    if (bound > 0) {
+      return random.nextInt(bound);
+    }
+    return 0;
   }  
 }
