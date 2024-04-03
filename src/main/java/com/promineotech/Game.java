@@ -19,15 +19,32 @@ public class Game extends JPanel
   private static List<Sprite> sprites = new ArrayList<>();
   
   void start() {
+    // Create random weapons
+    for(int index = 0; index < 8; index++) {
+      sprites.add(new Weapon());
+    }
+    
+    sprites.add(new Person("George"));
+    sprites.add(new Person("Ava"));
+    sprites.add(new Person("Bob"));
+    sprites.add(new Person("Timothy"));
+    sprites.add(new Person("Susan"));
+    sprites.add(new Person("Carrie"));
+    sprites.add(new Person("Jennifer"));
+
+    sprites.add(new Zombie("Marcus"));
+    // sprites.add(new Zombie("Britney"));
+    
     while(true) {
       try {
-        for(Sprite sprite : sprites) {
+        for(Sprite sprite : getSprites()) {
           if (sprite instanceof MoveableSprite) {
-            boolean isZombie = sprite instanceof Zombie;
-            boolean isPerson = (! isZombie) && (sprite instanceof Person);
+            // Move / Change Position
             ((MoveableSprite) sprite).move();
-            
+              
             // Collision detection
+            Iterable<Sprite> collided = sprite.getCollided(sprites);
+            ((MoveableSprite) sprite).handleCollision(collided);
           }
         }
         
@@ -71,7 +88,7 @@ public class Game extends JPanel
    * @return The collection of sprites.
    */
   public static Iterable<Sprite> getSprites() {
-    return sprites;
+    return new ArrayList<Sprite>(sprites);
   }
   
   /**
@@ -141,6 +158,9 @@ public class Game extends JPanel
    * @return the next pseudorandom, uniformly distributed int value between zero (inclusive) and bound (exclusive) from this random number generator's sequence
    */
   public static int getRandomInt(int bound) {
-    return random.nextInt(bound);
+    if (bound > 0) {
+      return random.nextInt(bound);
+    }
+    return 0;
   }  
 }

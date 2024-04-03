@@ -4,11 +4,12 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javax.imageio.ImageIO;
 
+/**
+ * Represents a drawable item to be rendered to the display.
+ */
 public class Sprite {
   protected int x;
   protected int y;
@@ -72,15 +73,17 @@ public class Sprite {
    * @param {Array.Sprite} sprites The collection of sprites to inspect.
    * @returns The collection of colliding sprites.
    */
-  protected List<Sprite> getCollided(Sprite[] sprites) {
+  protected Iterable<Sprite> getCollided(Iterable<Sprite> sprites) {
     Rectangle boundingRectangle = this.getBoundingRectangle();
     
     List<Sprite> collided = new ArrayList<>();
-    for(Sprite sprite : sprites) {
-      if ((sprite != this) && (sprite != null) &&  
-          (sprite.intersectsWith(boundingRectangle.x1, boundingRectangle.y1,
-                                 boundingRectangle.x2, boundingRectangle.y2))) {
-        collided.add(sprite);
+    if (sprites != null) {
+      for(Sprite sprite : sprites) {
+        if ((sprite != this) && (sprite != null) &&  
+            (sprite.intersectsWith(boundingRectangle.x1, boundingRectangle.y1,
+                                   boundingRectangle.x2, boundingRectangle.y2))) {
+          collided.add(sprite);
+        }
       }
     }
     return collided;
