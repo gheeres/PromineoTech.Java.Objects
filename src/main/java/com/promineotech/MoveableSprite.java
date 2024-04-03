@@ -12,6 +12,10 @@ public class MoveableSprite extends Sprite {
   private int speed;
   private int direction;
   
+  public MoveableSprite(String iconName) {
+    this(iconName, Game.getRandomInt(Game.getDefaultCanvasWidth()), Game.getRandomInt(Game.getDefaultCanvasHeight()));
+  }
+  
   public MoveableSprite(String iconName, int x, int y) {
     this(iconName, x, y, Math.max(1, Game.getRandomInt(10)), Math.max(1, Game.getRandomInt(360)));
   }

@@ -14,6 +14,10 @@ public class Sprite {
   private String iconName;
   private BufferedImage icon;
   
+  public Sprite(String iconName) {
+    this(iconName, Game.getRandomInt(Game.getDefaultCanvasWidth()), Game.getRandomInt(Game.getDefaultCanvasHeight()));
+  }
+  
   public Sprite(String iconName, int x, int y) {
     this.x = x;
     this.y = y;
