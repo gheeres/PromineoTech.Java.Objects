@@ -17,11 +17,16 @@ public class MoveableSprite extends Sprite {
   }
   
   public MoveableSprite(String iconName, int x, int y) {
-    this(iconName, x, y, Math.max(1, Game.getRandomInt(10)), Math.max(1, Game.getRandomInt(360)));
+    this(iconName, x, y, Math.max(1, Game.getRandomInt(10)), Game.getRandomInt(360));
   }
 
   public MoveableSprite(String iconName, int x, int y, int speed, int direction) {
     super(iconName, x, y);
+
+    // Prevent straight up/down & side/side
+    if ((direction == 0) || (direction % 90 == 0)) {
+      direction++;
+    }
 
     this.speed = speed;
     this.direction = direction;
