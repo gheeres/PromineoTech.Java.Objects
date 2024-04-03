@@ -33,6 +33,40 @@ public class MoveableSprite extends Sprite {
   }
   
   /**
+   * Retrieves the current speed of the sprite. How far it moves in a straight line.
+   * @returns The current speed.
+   */
+  public int getSpeed() {
+    return speed;
+  }
+
+  /**
+   * Changes the speed of the specified sprite.
+   * @param speed The new speed.
+   */
+  public void setSpeed(int speed) {
+    if (speed >= 0) {
+      this.speed = speed;
+    }
+  }
+  
+  /**
+   * Stops the sprites movement.
+   */
+  public void stop() {
+    setSpeed(0);
+  }
+  
+  /**
+   * Changes the direction/angle that the specified sprite is moving.
+   * @param direction The new angle / direction (0-360).
+   */
+  public void setDirection(int direction) {
+    if (direction >= 0) {
+      this.direction = direction;
+    }
+  }  
+  /**
    * Moves the specified sprite based on speed and direction.
    */
   public void move(int x, int y) {

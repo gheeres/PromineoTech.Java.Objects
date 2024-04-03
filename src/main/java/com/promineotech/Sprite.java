@@ -32,6 +32,14 @@ public class Sprite {
   }
   
   /**
+   * Retrieves the currently rendered icon/sprite.
+   * @return The name of the current icon.
+   */
+  public String getIcon() {
+    return iconName;
+  }
+  
+  /**
    * Retrieves the bounding rectangle for the sprite.
    * @returns {Object} The bounding x1,y1;x2,y2 rectangle.
    */
@@ -103,7 +111,7 @@ public class Sprite {
    */
   public void render(Graphics graphics) {
     if (icon != null) {
-      System.out.println(this.toString());
+      // System.out.println(this.toString());
       graphics.drawImage(icon, x, y, size, size, null);
     } 
   }
