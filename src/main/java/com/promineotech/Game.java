@@ -23,7 +23,7 @@ public class Game extends JPanel
     while(true) {
       try {
         for(Sprite sprite : sprites) {
-          if (sprite.getClass() == MoveableSprite.class) {
+          if (sprite instanceof MoveableSprite) {
             ((MoveableSprite) sprite).move();
           }
         }
