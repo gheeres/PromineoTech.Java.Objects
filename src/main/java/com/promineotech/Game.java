@@ -16,15 +16,18 @@ public class Game extends JPanel
   private static final int defaultCanvasWidth = 800;
   private static final int defaultCanvasHeight = 600;
   private static final int defaultSpriteSize = 32;
-
-  List<Sprite> sprites = new ArrayList<>();
+  private static List<Sprite> sprites = new ArrayList<>();
   
   void start() {
     while(true) {
       try {
         for(Sprite sprite : sprites) {
           if (sprite instanceof MoveableSprite) {
+            boolean isZombie = sprite instanceof Zombie;
+            boolean isPerson = (! isZombie) && (sprite instanceof Person);
             ((MoveableSprite) sprite).move();
+            
+            // Collision detection
           }
         }
         
@@ -61,6 +64,38 @@ public class Game extends JPanel
     for(Sprite sprite : sprites) {
       sprite.render(g);
     }
+  }
+
+  /**
+   * Get's all of the current / active sprites that are in play.
+   * @return The collection of sprites.
+   */
+  public static Iterable<Sprite> getSprites() {
+    return sprites;
+  }
+  
+  /**
+   * Adds the specified sprite to the game.
+   * @param sprite The sprite to add.
+   * @return The updated collection of sprites.
+   */
+  public static Iterable<Sprite> addSprite(Sprite sprite) {
+    if (sprite != null) {
+      sprites.add(sprite);
+    }
+    return sprites;
+  }
+
+  /**
+   * Removes the specified sprite from game play.
+   * @param sprite The sprite to add.
+   * @return The updated collection of sprites.
+   */
+  public static Iterable<Sprite> removeSprite(Sprite sprite) {
+    if (sprite != null) {
+      sprites.remove(sprite);
+    }
+    return sprites;
   }
 
   /**

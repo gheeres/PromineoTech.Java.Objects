@@ -4,7 +4,9 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.imageio.ImageIO;
 
 public class Sprite {
@@ -70,7 +72,7 @@ public class Sprite {
    * @param {Array.Sprite} sprites The collection of sprites to inspect.
    * @returns The collection of colliding sprites.
    */
-  List<Sprite> getCollided(Sprite[] sprites) {
+  protected List<Sprite> getCollided(Sprite[] sprites) {
     Rectangle boundingRectangle = this.getBoundingRectangle();
     
     List<Sprite> collided = new ArrayList<>();
@@ -87,6 +89,7 @@ public class Sprite {
   /**
    * A custom method to define what happens when the Sprite interacts with another Sprite.
    * @param thing The Sprite being interacted with.
+
    */
   public void interactWith(Sprite thing) {
   }
